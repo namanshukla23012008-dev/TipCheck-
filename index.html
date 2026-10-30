@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TipCheck+ | Read the tip. Not the hype.</title>
+<style>
+:root{--bg:#f6f4f1;--card:#fff;--ink:#1c1b1a;--mut:#6d6862;--line:#e4dfd9;--red:#8c1c1c;--redsoft:#f6e3e0;--ok:#2d6a4f;--oksoft:#e3f1e8;--amb:#8a5a00;--ambsoft:#fbf0d9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161514;--card:#1f1d1c;--ink:#f1eeea;--mut:#a39d95;--line:#35312e;--red:#e58a82;--redsoft:#3a2321;--ok:#7fd1a2;--oksoft:#1f3329;--amb:#e8bd6a;--ambsoft:#372c15;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#161514;--card:#1f1d1c;--ink:#f1eeea;--mut:#a39d95;--line:#35312e;--red:#e58a82;--redsoft:#3a2321;--ok:#7fd1a2;--oksoft:#1f3329;--amb:#e8bd6a;--ambsoft:#372c15;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:1040px;margin:0 auto;padding:18px 18px 60px}
+header{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700;font-size:18px;display:flex;gap:8px;align-items:center}.logo i{width:28px;height:28px;border-radius:8px;background:var(--redsoft);color:var(--red);display:grid;place-items:center;font-style:normal}
+select{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:7px 10px;font:inherit;font-size:13px}
+.eye{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:34px 0 10px}
+h1{font-size:clamp(38px,8vw,64px);line-height:1.02;margin:0;letter-spacing:-.03em}h1 span{color:var(--red);display:block}
+.sub{color:var(--mut);max-width:480px;margin:14px 0}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{font-size:12px;border:1px solid var(--line);border-radius:7px;padding:3px 9px;color:var(--mut);background:var(--card)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+.card h2{font-size:16px;margin:0}.card small{color:var(--mut)}
+textarea{width:100%;height:150px;margin-top:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);padding:12px;font:inherit;resize:vertical}
+textarea:focus{outline:2px solid var(--red);outline-offset:0}
+.meta{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin:6px 0 12px}
+.btn{width:100%;border:0;border-radius:12px;background:var(--red);color:#fff;font:inherit;font-weight:600;padding:13px;cursor:pointer}
+:root:not([data-theme="light"]) .btn{color:#1a0b0a}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sm{width:auto;padding:9px 16px;font-size:14px}.btn.ghost{background:transparent;color:var(--red);border:1px solid var(--red)}
+.priv{text-align:center;font-size:12px;color:var(--mut);margin-top:10px}
+.ex{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ex button{background:var(--bg);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:9px;font:inherit;font-size:13px;text-align:left;cursor:pointer}.ex button:hover{border-color:var(--red)}
+.note{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px;color:var(--mut);margin-top:12px}
+.empty{text-align:center;padding:40px 10px;color:var(--mut)}.empty b{display:block;color:var(--ink);font-size:20px;margin:12px 0 6px}.empty i{width:54px;height:54px;border-radius:14px;background:var(--redsoft);color:var(--red);display:inline-grid;place-items:center;font-style:normal;font-size:24px}
+.verdict{border-radius:14px;padding:14px;margin:10px 0}.verdict small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase}.verdict b{font-size:20px}
+.v-ok{background:var(--oksoft);color:var(--ok)}.v-mid{background:var(--ambsoft);color:var(--amb)}.v-hi{background:var(--redsoft);color:var(--red)}
+.meter{height:7px;border-radius:9px;background:var(--line);overflow:hidden;margin:6px 0}.meter div{height:100%;background:var(--red);transition:width .5s}
+.row{display:flex;justify-content:space-between;align-items:baseline}.row b{font-size:26px}
+h3{font-size:13px;margin:18px 0 8px;display:flex;justify-content:space-between}
+.flag{border:1px solid var(--line);border-radius:12px;padding:11px;margin-bottom:8px;background:var(--bg)}.flag q{display:block;font-weight:600;quotes:none}.flag p{margin:4px 0;font-size:13px;color:var(--mut)}
+.flag a,.ver a{font-size:12px;color:var(--red)}
+.ver{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px}.ver label{display:flex;gap:9px;font-size:13px;margin:6px 0}
+.gem{margin-top:14px;border:1px dashed var(--red);border-radius:12px;padding:12px;font-size:13px}.gem h4{margin:0 0 6px;font-size:13px;color:var(--red)}
+.coach{border-top:2px solid var(--red);margin-top:18px;padding-top:14px}.coach p{margin:2px 0 10px;color:var(--mut);font-size:13px}
+.quiz{margin-top:12px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px}.quiz .qb{display:flex;gap:8px;margin-top:8px}
+.hide{display:none}.badge{font-size:11px;background:var(--oksoft);color:var(--ok);padding:2px 8px;border-radius:9px}
+footer{margin-top:30px;font-size:12px;color:var(--mut);text-align:center}
+</style></head><body><div class="w">
+<header><div class="logo"><i>🛡</i>TipCheck<span style="color:var(--red)">+</span></div>
+<select id="lang" aria-label="Language"><option value="en">English</option><option value="hi">हिन्दी</option></select></header>
+<div class="eye" id="t_eye"></div>
+<h1><span style="color:var(--ink);display:block" id="t_h1a"></span><span id="t_h1b"></span></h1>
+<p class="sub" id="t_sub"></p>
+<div class="chips"><span class="chip" id="c1"></span><span class="chip">English + हिन्दी</span><span class="chip" id="c3"></span><span class="chip" id="c4"></span></div>
+<div class="grid">
+<section class="card"><h2>💬 <span id="t_paste"></span></h2><small id="t_pastesub"></small>
+<textarea id="msg" maxlength="1000"></textarea>
+<div class="meta"><span id="t_nopii"></span><span id="cnt">0 / 1000</span></div>
+<button class="btn" id="go" disabled></button>
+<div class="priv" id="t_priv"></div>
+<h3 style="justify-content:flex-start;margin-top:20px" id="t_try"></h3>
+<div class="ex" id="ex"></div>
+<div class="note" id="t_edu"></div></section>
+<section class="card" id="out" aria-live="polite"></section>
+</div>
+<footer>Open source (Apache-2.0) · Education only, not investment advice · Apache-2.0 licensed</footer>
+</div>
+<script>
+var T={en:{eye:"Financial content literacy",h1a:"Read the tip.",h1b:"Not the hype.",sub:"Pause before trusting a financial message. Turn a forwarded tip into a moment of informed pause.",c1:"Local analysis",c3:"Explainable signals",c4:"Open source",fam:"Warn your family (forwardable)",copy:"Copy",read:"Read aloud",paid:"Already paid or shared details?",paidt:"Call the national cybercrime helpline 1930 immediately and report at",paste:"Paste message",pastesub:"A stock tip. A sales pitch. A message worth checking.",ph:"Paste a forwarded financial message here…",nopii:"No personal details, please.",go:"Check message →",priv:"Remove personal details. Messages are not intentionally stored.",tryx:"Try a fictional example",edu:"Education only. Not investment advice. Remove names, phone numbers and account details before pasting.",eh:"Clarity starts with a pause.",ep:"Paste a message or try an example. We will show what it says, what to question and where to check.",yours:"Your analysis",meter:"Red-flag meter",mnote:"Heuristic red-flag score, not scam probability. Promotion does not mean fraud. No flags does not mean safe. Sources have not been verified.",found:"Red flags found",none:"No strong red flags found. Still verify who is sending it.",ver:"Verify independently",v1:"Check the claimed entity on the official SEBI site, including registration status and contact details.",v2:"A registration number in a message can be copied. It is not proof of identity.",v3:"Do not open unknown links or share OTPs or financial details.",sebi:"Read SEBI reference ↗",spot:"Spot the signal",spots:"A 60-second practice round using this result.",coach:"Try the literacy coach →",q:["Hype","Info"],right:"Correct. ",wrong:"Not quite. ",next:"Next →",score:"Your score: ",v:["Looks informational","Mixed signals","Looks like a promotion","High-risk pattern"],ex:["Guaranteed returns","Scam warning","Diversification","Paid course","Hindi pressure tip","Market bulletin"]},
+hi:{eye:"वित्तीय सामग्री साक्षरता",h1a:"टिप पढ़ें।",h1b:"हाइप नहीं।",sub:"किसी भी वित्तीय संदेश पर भरोसा करने से पहले रुकें। फॉरवर्ड की गई टिप को समझदारी भरे विराम में बदलें।",c1:"लोकल विश्लेषण",c3:"समझने योग्य संकेत",c4:"ओपन सोर्स",fam:"परिवार को सावधान करें (फॉरवर्ड करें)",copy:"कॉपी",read:"सुनें",paid:"पैसे दे दिए या जानकारी साझा की?",paidt:"तुरंत राष्ट्रीय साइबर क्राइम हेल्पलाइन 1930 पर कॉल करें और रिपोर्ट करें:",paste:"संदेश पेस्ट करें",pastesub:"स्टॉक टिप, सेल्स पिच, या कोई भी संदेश जिसे जाँचना है।",ph:"यहाँ फॉरवर्ड किया गया वित्तीय संदेश पेस्ट करें…",nopii:"कृपया निजी जानकारी न डालें।",go:"संदेश जाँचें →",priv:"निजी जानकारी हटाएँ। संदेश जानबूझकर सेव नहीं किए जाते।",tryx:"एक काल्पनिक उदाहरण आज़माएँ",edu:"केवल शिक्षा हेतु। निवेश सलाह नहीं। पेस्ट करने से पहले नाम, फ़ोन नंबर और खाता विवरण हटाएँ।",eh:"स्पष्टता एक विराम से शुरू होती है।",ep:"संदेश पेस्ट करें या उदाहरण चुनें। हम बताएँगे कि उसमें क्या है, किस पर सवाल करें और कहाँ जाँचें।",yours:"आपका विश्लेषण",meter:"रेड-फ़्लैग मीटर",mnote:"यह अनुमानित रेड-फ़्लैग स्कोर है, ठगी की संभावना नहीं। प्रमोशन का मतलब धोखा नहीं। कोई फ़्लैग नहीं का मतलब सुरक्षित नहीं। स्रोत सत्यापित नहीं हैं।",found:"मिले रेड फ़्लैग",none:"कोई मजबूत रेड फ़्लैग नहीं मिला। फिर भी भेजने वाले की जाँच करें।",ver:"स्वयं सत्यापित करें",v1:"आधिकारिक SEBI साइट पर बताई गई संस्था का रजिस्ट्रेशन और संपर्क विवरण जाँचें।",v2:"संदेश में लिखा रजिस्ट्रेशन नंबर कॉपी किया जा सकता है। यह पहचान का प्रमाण नहीं है।",v3:"अनजान लिंक न खोलें, OTP या वित्तीय जानकारी साझा न करें।",sebi:"SEBI संदर्भ पढ़ें ↗",spot:"संकेत पहचानें",spots:"इस परिणाम पर आधारित 60 सेकंड का अभ्यास।",coach:"साक्षरता कोच आज़माएँ →",q:["हाइप","जानकारी"],right:"सही। ",wrong:"ठीक नहीं। ",next:"अगला →",score:"आपका स्कोर: ",v:["जानकारी जैसा","मिले-जुले संकेत","प्रमोशन जैसा","उच्च जोखिम पैटर्न"],ex:["गारंटीड रिटर्न","ठगी चेतावनी","डाइवर्सिफिकेशन","पेड कोर्स","हिंदी प्रेशर टिप","मार्केट बुलेटिन"]}};
+var EX=["Join our group today. 100% guaranteed returns, zero risk. Last 5 seats left!","Invest 499 and I will give you 1500 in just 3 hour","Spreading savings across different assets can reduce the impact of one poor investment. Review your goals before choosing.","Buy my VIP trading course for Rs 9,999 and earn Rs 1 lakh every month. Pay today, offer ends tonight.","Bhai ye stock kal double hoga, abhi paisa daalo, insider tip hai, kisi ko mat batana","Markets closed slightly higher today. Analysts note that results season may affect volatility. This is not a recommendation."];
+var R=[{re:/guarantee\w*|100\s*%\s*(safe|sure|profit|return\w*)|risk[- ]?free|zero risk|sure[- ]?shot|pakka/i,w:25,en:["Guaranteed outcome","No investment can promise returns without risk. Treat certainty as a warning sign."],hi:["गारंटीड नतीजा","कोई भी निवेश बिना जोखिम के रिटर्न की गारंटी नहीं दे सकता। निश्चितता एक चेतावनी संकेत है।"]},
+{re:/in just \d+\s*\w+|last (few )?(seat|slot|chance)\w*|only today|today only|ends? tonight|hurry|jaldi|abhi (paisa|invest)\w*|limited (seats|time)/i,w:15,en:["Pressure to act quickly","Pressure to act quickly can stop you checking the offer."],hi:["जल्दी करने का दबाव","जल्दबाज़ी आपको ऑफ़र जाँचने से रोकती है।"]},
+{re:/insider|secret|don.?t tell|kisi ko mat|operator|confidential/i,w:20,en:["Secrecy or insider claim","Real investment information is not secret. Insider claims may also be illegal to act on."],hi:["गोपनीयता या इनसाइडर दावा","असली निवेश जानकारी गुप्त नहीं होती। इनसाइडर जानकारी पर काम करना ग़ैरकानूनी भी हो सकता है।"]},
+{re:/\bdouble\b|\b10x\b|\b100x\b|\bdoubl\w+/i,w:15,en:["Unrealistic growth claim","Claims of doubling or multiplying money quickly rarely describe real markets."],hi:["अवास्तविक बढ़त का दावा","पैसा जल्दी दोगुना करने के दावे असली बाज़ार का वर्णन कम ही करते हैं।"]},
+{re:/(buy|pay|join|fee|registration)[^.]{0,30}(course|group|premium|vip|membership)|vip group|paid group/i,w:15,en:["Pay to join","Paid groups and courses are often the business model behind the tips."],hi:["जुड़ने के लिए भुगतान","पेड ग्रुप और कोर्स अक्सर टिप के पीछे का असली बिज़नेस होते हैं।"]},
+{re:/\botp\b|\bcvv\b|password|click (the )?link|bit\.ly|t\.me|telegram|whatsapp group|send (your )?(aadhaar|pan|account)/i,w:20,en:["Link or sensitive-data request","Never share OTPs or account details, and avoid unknown links."],hi:["लिंक या संवेदनशील डेटा की माँग","OTP या खाता विवरण कभी साझा न करें और अनजान लिंक से बचें।"]},
+{re:/sebi[- ](registered|approved)|registered advisor/i,w:5,en:["Registration claim","A claim of registration is not proof. Check the official register yourself."],hi:["रजिस्ट्रेशन का दावा","रजिस्ट्रेशन का दावा प्रमाण नहीं है। आधिकारिक रजिस्टर में खुद जाँचें।"]}];
+var $=function(i){return document.getElementById(i)},lang="en",last=null;
+function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function analyze(t){var f=[],s=0,m;
+R.forEach(function(r){if(m=t.match(r.re)){f.push({q:m[0],r:r});s+=r.w}});
+var a=t.match(/(\d[\d,]*)\D{0,25}?(?:give|get|return|earn|milega|dunga)\D{0,20}?(\d[\d,]*)/i);
+if(a){var x=+a[1].replace(/,/g,""),y=+a[2].replace(/,/g,"");if(x>0&&y/x>=1.5){f.unshift({q:a[0].replace(/\s+/g," "),r:{en:["Promise to multiply money","The message asks for money and promises to pay back at least "+(Math.round(y/x*10)/10)+"x that amount. Check the claim and recipient independently. This is not proof of fraud."],hi:["पैसे को कई गुना करने का वादा","संदेश पैसे माँगता है और उससे "+(Math.round(y/x*10)/10)+" गुना लौटाने का वादा करता है। दावे और प्राप्तकर्ता को स्वतंत्र रूप से जाँचें। यह धोखे का प्रमाण नहीं है।"]}});s+=35}}
+return{score:Math.min(100,s),flags:f}}
+function render(){var t=T[lang];if(!last){$("out").innerHTML='<div class="empty"><i>⌗</i><small style="display:block;margin-top:14px;letter-spacing:.12em;text-transform:uppercase">'+t.yours+'</small><b>'+t.eh+'</b>'+t.ep+'</div>';return}
+var s=last.score,vi=s<20?0:s<45?1:s<80?2:3,cl=vi==0?"v-ok":vi==1?"v-mid":"v-hi";
+var h='<small style="letter-spacing:.12em;text-transform:uppercase;color:var(--mut)">'+t.yours+'</small><div class="verdict '+cl+'"><b>'+t.v[vi]+'</b></div>';
+h+='<div class="row"><span>'+t.meter+'</span><b>'+s+'<small>/100</small></b></div><div class="meter"><div style="width:'+s+'%"></div></div><small style="color:var(--mut)">'+t.mnote+'</small>';
+h+='<h3>⚠ '+t.found+' <span class="badge">'+last.flags.length+'</span></h3>';
+if(!last.flags.length)h+='<p style="font-size:13px">'+t.none+'</p>';
+last.flags.forEach(function(f){var d=f.r[lang];h+='<div class="flag"><q>“'+esc(f.q.trim())+'”</q><p><b>'+d[0]+'.</b> '+d[1]+'</p><a href="https://investor.sebi.gov.in" target="_blank" rel="noopener">'+t.sebi+'</a></div>'});
+h+='<h3>◎ '+t.ver+'</h3><div class="ver"><label>☐ <span>'+t.v1+'</span></label><label>☐ <span>'+t.v2+'</span></label><label>☐ <span>'+t.v3+'</span></label></div>';
+h+=fam();
+h+='<div class="coach"><b>🎯 '+t.spot+'</b><p>'+t.spots+'</p><button class="btn sm" id="cb">'+t.coach+'</button><div id="qz"></div></div>';
+$("out").innerHTML=h;wire();$("cb").onclick=function(){quiz(0,0)}}
+var Q=[["Markets closed slightly higher today. This is not a recommendation.",0],["Double your money in 2 days! Only today, VIP group.",1],["Our fund factsheet lists fees, risks and past performance. Read the offer document.",0]];
+function quiz(i,sc){var t=T[lang],z=$("qz");if(i>=Q.length){z.innerHTML='<div class="quiz"><b>'+t.score+sc+'/'+Q.length+'</b></div>';return}
+z.innerHTML='<div class="quiz"><div>“'+Q[i][0]+'”</div><div class="qb"><button class="btn ghost sm" data-a="1">'+t.q[0]+'</button><button class="btn ghost sm" data-a="0">'+t.q[1]+'</button></div></div>';
+Array.prototype.forEach.call(z.querySelectorAll("button"),function(b){b.onclick=function(){var ok=(+b.dataset.a)==Q[i][1];z.innerHTML='<div class="quiz"><b>'+(ok?t.right:t.wrong)+'</b><div class="qb"><button class="btn sm" id="nx">'+t.next+'</button></div></div>';$("nx").onclick=function(){quiz(i+1,sc+(ok?1:0))}}})}
+var FM={en:function(n){return "Heads up: a message like this shows "+n+" common warning sign(s) of a financial scam (pressure, guaranteed returns or secrecy). Please do not pay or share OTPs. Check the sender on the official SEBI site before trusting any tip."},hi:function(n){return "सावधान: ऐसे संदेश में ठगी के "+n+" आम संकेत दिखते हैं (जल्दबाज़ी, गारंटीड रिटर्न या गोपनीयता)। कृपया पैसे या OTP साझा न करें। किसी भी टिप पर भरोसा करने से पहले SEBI की आधिकारिक साइट पर भेजने वाले की जाँच करें।"}};
+function fam(){var t=T[lang],h='';
+if(last.flags.length){var m=FM[lang](last.flags.length);h+='<h3>👪 '+t.fam+'</h3><div class="note" id="fmsg" style="margin-top:0">'+esc(m)+'</div><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button class="btn ghost sm" id="fc">'+t.copy+'</button><a class="btn sm" style="text-decoration:none;display:inline-block" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(m)+'">WhatsApp</a><button class="btn ghost sm" id="rd">🔊 '+t.read+'</button></div>'}
+return h+'<div class="note" style="margin-top:12px"><b>🚨 '+t.paid+'</b><br>'+t.paidt+' <a href="https://cybercrime.gov.in" target="_blank" rel="noopener" style="color:var(--red)">cybercrime.gov.in</a></div>'}
+function wire(){if(!$("fc"))return;var m=$("fmsg").textContent;
+$("fc").onclick=function(){try{navigator.clipboard.writeText(m);this.textContent="✓"}catch(e){}};
+$("rd").onclick=function(){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(m);u.lang=lang=="hi"?"hi-IN":"en-IN";speechSynthesis.speak(u)}catch(e){}}}
+function setLang(l){lang=l;var t=T[l];document.documentElement.lang=l;
+$("t_eye").textContent="● "+t.eye;$("t_h1a").textContent=t.h1a;$("t_h1b").textContent=t.h1b;$("t_sub").textContent=t.sub;$("c1").textContent=t.c1;$("c3").textContent=t.c3;$("c4").textContent=t.c4;
+$("t_paste").textContent=t.paste;$("t_pastesub").textContent=t.pastesub;$("msg").placeholder=t.ph;$("t_nopii").textContent=t.nopii;$("go").textContent=t.go;$("t_priv").textContent="ⓘ "+t.priv;$("t_try").textContent="✎ "+t.tryx;$("t_edu").textContent=t.edu;
+$("ex").innerHTML=t.ex.map(function(n,i){return'<button data-i="'+i+'">• '+n+'</button>'}).join("");
+Array.prototype.forEach.call($("ex").children,function(b){b.onclick=function(){$("msg").value=EX[+b.dataset.i];upd();run()}});
+if(last)last=analyze($("msg").value);render()}
+function upd(){var n=$("msg").value.length;$("cnt").textContent=n+" / 1000";$("go").disabled=!$("msg").value.trim()}
+function run(){last=analyze($("msg").value);render();if(window.innerWidth<760)$("out").scrollIntoView({behavior:"smooth"})}
+$("msg").oninput=upd;$("go").onclick=run;$("lang").onchange=function(){setLang(this.value)};setLang("en");
+</script></body></html>
